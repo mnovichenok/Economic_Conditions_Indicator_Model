@@ -96,7 +96,7 @@ if st.button("Determine Economic Regime"):
     }
     user_data = {k: v for k, v in user_data.items() if v != -1.0} #only keep key/value pairs where value!= -1 (initial placeholder value)
 
-    result = requests.post("http://localhost:8000/data/", json=user_data)
+    result = requests.post("http://econ_conditions_logic:8000/data/", json=user_data)
 
     if result.status_code == 200:
         regime = result.json()["regime"]

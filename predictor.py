@@ -1,15 +1,36 @@
-# %%
 from logistic_regression import logisticRegression  
 from data import df, scaler, X_train, X_test, y_train, y_test  
-from model_testing import best_params
 import numpy as np
 from datetime import datetime
+from itertools import product
+from sklearn.metrics import accuracy_score
+
 
 # %%
 from fastapi import FastAPI
 from pydantic import BaseModel
 import requests
 from typing import Optional
+
+# %%
+#grid search
+learning_rates = [0.5, 0.1, 0.05, 0.01, 0.001]
+max_iters_list = [200, 250, 500, 700, 1000]
+epsilons = [1e-2, 1e-4, 1e-6]
+
+best_params = None
+best_score = 0
+
+for lr, max_iter, eps in product(learning_rates, max_iters_list, epsilons):
+    model = logisticRegression(learning_rate=lr, max_iters=max_iter, epsilon=eps)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    acc = accuracy_score(y_test, y_pred)
+
+    if acc > best_score:
+        best_score = acc
+        best_params = (lr, max_iter, eps)
+
 
 # %%
 now = datetime.now()

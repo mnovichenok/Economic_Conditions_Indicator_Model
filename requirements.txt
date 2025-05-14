@@ -1,0 +1,12 @@
+numpy
+scikit-learn
+pandas
+scipy
+imblearn
+datetime
+
+fastapi
+uvicorn
+pydantic
+requests
+typing
