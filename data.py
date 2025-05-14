@@ -44,7 +44,6 @@ def categorize_CLI_change(row):
         return 3
 
 df['Regime'] = df.apply(categorize_CLI_change, axis=1)
-df.head()
 
 # %%
 #DATA PREPROCESSING

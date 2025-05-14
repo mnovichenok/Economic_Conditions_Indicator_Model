@@ -1,11 +1,5 @@
-# %%
 from data import df
-df.head()
-
-# %%
-import pandas as pd
 import numpy as np
-import seaborn as sns
 
 
 #softmax function
@@ -22,8 +16,8 @@ class logisticRegression:
 
     def __init__(self, learning_rate, max_iters, epsilon):
         self.learning_rate = learning_rate
-        self.epsilon = epsilon  # represents termination condition (smallest objective change)
-        self.max_iters = max_iters  # maximum number of iterations of gradient descent
+        self.epsilon = epsilon  
+        self.max_iters = max_iters  
 
     def one_hot_encoded (self, y, num_classes):
         #converts labels to one-hot encoding form (N x K matrix)
@@ -35,7 +29,7 @@ class logisticRegression:
     #train the weights
     def fit(self, x, y): 
         x = np.c_[np.ones(x.shape[0]), x] #add a column of 1's at the start of X for biases
-        K = len(np.unique(y))   #number of classes (high, low, or mid risk)
+        K = len(np.unique(y))   #number of classes 
         Y = self.one_hot_encoded(y,K)
         N, D = x.shape #x is datapoints by features matrix; N is number of women tested; D is number of features
        
