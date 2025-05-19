@@ -45,4 +45,39 @@ Tuning: Parametric Grid Search for learning rate, regularization strength (epsil
 <img width="523" alt="Screenshot 2025-05-14 at 12 07 52 PM" src="https://github.com/user-attachments/assets/6783c124-5ba2-4817-8fcb-821df3ae9427" />
 
 
+## Installation & Running the Project
+###  Prerequisites
+
+- [Podman](https://podman.io/) installed and configured
+- Podman machine (for macOS users):
+```bash
+podman machine init && podman machine start
+```
+
+#### 1. Clone the repository
+
+```bash
+git clone https://github.com/mnovichenok/Economic_Conditions_Indicator_Model.git
+cd Economic_Conditions_Indicator_Model
+```
+
+#### 2. Create a shared network and build the containers
+
+```bash
+podman network create econ-conditions-net
+podman build -f Containerfile -t economic_conditions_model .
+podman build -f Containerfile.ui -t economic_conditions_model_ui .
+```
+
+#### 3. Run the Containers
+
+```bash
+podman run -d --rm --name econ_conditions_logic --network econ-conditions-net economic_conditions_model
+podman run -d --rm --name ui --network econ-conditions-net -p 8501:8501 economic_conditions_model_ui
+```
+
+#### 4. Access the App
+
+http://localhost:8501
+
 ### -Maya Novichenok
